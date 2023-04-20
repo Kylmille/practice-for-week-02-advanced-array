@@ -15,11 +15,13 @@ console.log(hipsterfy('panthers are great animals')); // 'panthrs ar gret animls
 */
 
 let removeLastVowel = function(word) {
-
+    return word.replace(/[aeiou]\w*$/, '');
 };
 
 let hipsterfy = function(sentence) {
-    
+    let words = sentence.split(' ');
+    let hipsterWords = words.map(removeLastVowel);
+    return hipsterWords.join(' ');
 };
 
 // alternative solution using Array.map

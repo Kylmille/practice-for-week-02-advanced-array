@@ -27,15 +27,50 @@ console.log(repeatingTranslate("pasta is my favorite dish"));   // "pastapasta i
 console.log(repeatingTranslate("her family flew to France"));   // "herer familyily flewew to FranceFrance"
 
 */
+function repeatingTranslate(sentence) {
+    const words = sentence.split(' ');
 
-let repeatingTranslate = function(sentence) {
-    // Your code here
-};
+    function isVowel(char) {
+      return 'aeiouAEIOU'.indexOf(char) !== -1;
+    }
+
+    function getLastVowelIndex(word) {
+      for (let i = word.length - 1; i >= 0; i--) {
+        if (isVowel(word[i])) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function translateWord(word) {
+      if (word.length < 3) {
+        return word;
+      }
+
+      const lastVowelIndex = getLastVowelIndex(word);
+
+      if (lastVowelIndex === -1) {
+        return word + word[word.length - 1];
+      } else if (isVowel(word[word.length - 1])) {
+        return word + word.slice(lastVowelIndex);
+      } else {
+        return word + word.slice(lastVowelIndex + 1);
+      }
+    }
+
+    const translatedWords = words.map(translateWord);
+
+    return translatedWords.join(' ');
+  }
+  
 
 
-let translateWord = function(word) {
-    // Your code here
-};
+
+
+
+
+
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 
@@ -43,4 +78,4 @@ try {
     module.exports = repeatingTranslate;
 } catch (e) {
     module.exports = null;
-}
+}
